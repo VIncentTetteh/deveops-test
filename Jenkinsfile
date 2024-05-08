@@ -28,9 +28,7 @@ pipeline {
                 git credentialsId: 'github-credentials', url: 'https://github.com/VIncentTetteh/deveops-test.git'
             }
         }
-    }
 
-    stages {
         stage('Deploy Helm Chart') {
             steps {
                 // Authenticate with Minikube
