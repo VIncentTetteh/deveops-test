@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Release.Name }}-configmap
+data:
+  dbHost: {{ .Values.wordpress.dbHost }}
+  dbName: {{ .Values.wordpress.dbName }}
+  dbUser: {{ .Values.wordpress.dbUser }}
+  dbSecretName: {{ .Values.wordpress.dbSecretName }}
