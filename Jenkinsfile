@@ -1,5 +1,13 @@
 pipeline {
     agent ubuntu-agent
+
+    parameters {
+        string(name: 'DB_HOST', defaultValue: 'mysql-wordpress', description: 'Database host')
+        string(name: 'DB_NAME', defaultValue: 'wordpress', description: 'Database name')
+        string(name: 'DB_USER', defaultValue: 'root', description: 'Database user')
+        string(name: 'DB_SECRET_NAME', defaultValue: 'mysql-secret', description: 'Database secret name')
+        string(name: 'PASSWORD', defaultValue: 'pass', description: 'Password')
+    }
     
     environment {
         // Set the Kubernetes server URL
@@ -7,7 +15,7 @@ pipeline {
         // Set the Kubernetes Service Account token
         KUBE_TOKEN = credentials('kubernetes-token')
         // Set the namespace where you want to deploy the Helm chart
-        NAMESPACE = 'your-namespace'
+        NAMESPACE = 'wordpress'
         RELEASE_NAME = "your-release-" + new Date().format("yyyyMMddHHmmss")
     }
 
@@ -30,7 +38,8 @@ pipeline {
                 sh "kubectl config use-context minikube"
 
                 // Deploy Helm chart to Minikube
-                sh "helm upgrade --install ${RELEASE_NAME} ./deveops-test/ --namespace ${NAMESPACE} --set wordpress.dbHost=mysql-wordpress --set wordpress.dbName=wordpress --set wordpress.dbUser=root --set wordpress.dbSecretName=mysql-secret --set wordpress.password=pass"}
+                sh "helm upgrade --install ${RELEASE_NAME} ./deveops-test --create-namespace --namespace ${NAMESPACE} --set wordpress.dbHost=${DB_HOST} --set wordpress.dbName=${DB_NAME} --set wordpress.dbUser=${DB_USER} --set wordpress.dbSecretName=${DB_SECRET_NAME} --set wordpress.password=${PASSWORD}"
+            }
         }
     }
         
