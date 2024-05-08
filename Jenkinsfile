@@ -13,9 +13,9 @@ pipeline {
     
     environment {
         // Set the Kubernetes server URL
-        KUBE_SERVER = "https://192.168.103.2:8443"
+        KUBE_SERVER = "https://52.213.150.78:8443"
         // Set the Kubernetes Service Account token
-        KUBE_TOKEN = credentials('kubernetes-token')
+        KUBE_TOKEN = credentials('minikube')
         // Set the namespace where you want to deploy the Helm chart
         NAMESPACE = 'wordpress'
         RELEASE_NAME = "wordpress-release-${BUILD_TAG}"
