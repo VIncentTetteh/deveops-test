@@ -1,5 +1,7 @@
 pipeline {
-    agent ubuntu-agent
+    agent {
+       label "ubuntu-agent"
+    }
 
     parameters {
         string(name: 'DB_HOST', defaultValue: 'mysql-wordpress', description: 'Database host')
@@ -16,7 +18,7 @@ pipeline {
         KUBE_TOKEN = credentials('kubernetes-token')
         // Set the namespace where you want to deploy the Helm chart
         NAMESPACE = 'wordpress'
-        RELEASE_NAME = "your-release-" + new Date().format("yyyyMMddHHmmss")
+        RELEASE_NAME = "wordpress-release-${BUILD_TAG}"
     }
 
     stages {
