@@ -25,7 +25,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 // Checkout your code from version control (e.g., Git)
-                git credentialsId: 'github-credentials', url: 'https://github.com/VIncentTetteh/deveops-test.git'
+                git credentialsId: 'github', url: 'https://github.com/VIncentTetteh/deveops-test.git'
             }
         }
 
