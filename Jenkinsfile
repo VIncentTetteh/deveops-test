@@ -27,7 +27,7 @@ pipeline {
         stage('Deploy Helm Chart') {
             steps {
                 // Deploy Helm chart to Minikube
-                sh "helm upgrade --install ${RELEASE_NAME} ./deveops-test --create-namespace --namespace ${NAMESPACE} --set wordpress.dbHost=${DB_HOST} --set wordpress.dbName=${DB_NAME} --set wordpress.dbUser=${DB_USER} --set wordpress.dbSecretName=${DB_SECRET_NAME} --set wordpress.password=${PASSWORD}"
+                sh "helm upgrade --install ${RELEASE_NAME} . --create-namespace --namespace ${NAMESPACE} --set wordpress.dbHost=${DB_HOST} --set wordpress.dbName=${DB_NAME} --set wordpress.dbUser=${DB_USER} --set wordpress.dbSecretName=${DB_SECRET_NAME} --set wordpress.password=${PASSWORD}"
             }
         }
     }
